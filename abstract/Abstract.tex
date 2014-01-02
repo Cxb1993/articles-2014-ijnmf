@@ -1,0 +1,105 @@
+\documentclass{Eccomas}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Two-phase flows in sinusoidally constricted channel using moving
+mesh/boundary technique}
+
+\author{Gustavo Anjos$^{1}$, Gustavo C.P. Oliveira$^{1}$, Jose Pontes$^{2}$
+and John R. Thome$^{3}$, Norberto Mangiavacchi$^{1}$}
+
+\heading{Gustavo Anjos, Gustavo Oliveira, Jose Pontes, John Thome and
+Norberto Mangiavacchi}
+
+\address{$^{1}$ Departamento de Engenharia Mec\^anica, Universidade do
+Estado do Rio de Janeiro, Rua S\~ao Francisco Xavier, 524, 20550-900,
+Rio de Janeiro, RJ, Brazil,  gustavo.rabello@gmail.com,
+http://gustavo.rabello.org\\
+$^{2}$ Metallurgy and Materials Engineering Dept - PEMM/COPPE/UFRJ, P.O. Box
+68505, 21941-972, Rio de Janeiro R. J., Brazil,  jopontes@metalmat.ufr.br\\
+$^{3}$ EPFL STI IGM LTCM, ME B1 345, Station 9, CH-1015, Lausanne,
+Switzerland,  john.thome@epfl.ch}
+
+\keywords{Sinusoidally constricted channel, Moving boundary, Two-phase
+flows, Arbitrary Lagrangian-Eulerian, Finite Element Method, complex
+geometry }
+
+\begin{document}
+
+Bubbles and drops dynamics through capillaries of variable cross-section
+still remains of considerable importantce in two-phase flows through
+porous media. Experimental studies are found in the literature where the
+motion of immiscible bubbles in different fluids is investigated.
+Recovery of oil by chemical flooding, biological processes and crude oil
+transportation in through pipelines are exemples of industry-related
+applications. 
+
+We seek to study numerically the effects of the surface tension, bubble
+dynamics and channel geometry for two-phase flows in sinusoidally
+constricted channels using a moving boundary domain scheme, which
+dramatically shortens the domain length. Such a scheme moves the
+computational boundary nodes periodically according to the flow field or
+bubble centroid's velocity. The set of equations is written in a
+generalized form namely the Arbitrary Lagrangian-Eulerian (ALE)
+description, which combines the best aspects of both Lagrangian and
+Eulerian framework. The two-phase inteface position moves according to
+the flow field and it is explicity described by a set of interconnected
+nodes, segments and elements which ensures a sharp representation of the
+front, not requiring the use of any additional equation of motion
+\cite{anjos2012},\cite{anjos2014}. Unlike the traditional numerical
+approach where the domain's boundary is fixed in space and time, the
+boundary nodes are in constant motion, thus simulating the relative
+velocity between the bubble and the wall. Such a technique allows one to
+decrease considerable the domain length and, therefore, decrease the
+computational processing time. 
+
+The new methodology proposed to simulate two-phase flows in sinusoidally
+constricted channels is compared to experimental results found in the
+literature \cite{olbricht1983},\cite{hemmat1996} showing good accuracy
+to describe interfacial forces and bubble dynamics in different complex
+geometries with moving boundaries. 
+
+%
+%   Finally the references done as a simple list,
+%   rather than by a redefined bibliography environment...
+%
+%\vspace{0.5cm}
+
+\begin{thebibliography}{99}
+\setlength{\parskip}{0pt}
+
+\bibitem{anjos2012}
+G.R. Anjos.
+\newblock {\em A 3D ALE Finite Element Method for Two-Phase Flows with Phase
+  Change}.
+\newblock PhD thesis, \'Ecole Polytechnique F\'ed\'erale de Lausanne, July
+  2012.
+
+\bibitem{anjos2014}
+G.R. Anjos, N.~Borhani, N.~Mangiavacchi, and J.R. Thome.
+\newblock 3d ale finite element method for two-phase flows.
+\newblock {\em Journal of Computational Physics}, 2014.
+\newblock Accepted for publication.
+
+\bibitem{hemmat1996}
+M.~Hemmat and A.~Borhan.
+\newblock Buoyancy-driven motion of drops and bubbles in a periodically
+  constricted capillary.
+\newblock {\em Chemical Engineering Communications}, 148-150(1):363--384, 1996.
+
+\bibitem{olbricht1983}
+W.L. Olbricht and L.G. Leal.
+\newblock The creeping motion of immiscible drops through a
+  converging/diverging tube.
+\newblock {\em Journal of Fluid Mechanics}, 134(1):329--355, 1983.
+
+%\bibliographystyle{plain}
+%bibliography{/Users/gustavo/projects/misc/latex/referencias}
+
+\end{thebibliography}
+
+\end{document}
+
+
