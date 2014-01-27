@@ -2,7 +2,7 @@
 # NOMES
 TEXFILE=main.tex
 TEXNOFIGSFILE=mainNoFigs.tex
-LETTER=letter.tex
+LETTER=letter3.tex
 
 # REGRAS
 DVIFILE=$(TEXFILE:%.tex=%.dvi)
