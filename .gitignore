@@ -1,0 +1,11 @@
+.DS*
+references
+*swp
+*.aux
+*.bbl
+*.blg
+*.log
+*.spl
+main.pdf
+ANJOS.pdf
+jcp.pdf

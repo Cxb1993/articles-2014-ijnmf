@@ -1,0 +1,103 @@
+\typeout{ ====================================================================}
+\typeout{ this is file main.tex, created at 27-Jan-2014                       }
+\typeout{ maintained by Gustavo Rabello dos Anjos                             }
+\typeout{ e-mail: gustavo.rabello@gmail.com                                   }
+\typeout{ ====================================================================}
+
+
+\documentclass[12pt,fleqn]{article}
+\usepackage[T1]{fontenc}              % acentuacao e hifenizacao portuguesa
+\usepackage[hmargin=30mm,vmargin=25mm]{geometry}
+%\usepackage[pdftex]{graphicx}        % pacote para inclusao de figuras,
+\usepackage{subfloat}                 % pacote para figuras duplas (subfigure)
+\usepackage{amssymb,amsmath,amsfonts} % pacote matematicos
+\usepackage{tocbibind}		      % para inclusao de bib e ind na TOC
+\usepackage{pictexwd,color}	          % ambiente para PICTEX
+\usepackage{alltt,verbatim,moreverb}  % para entrada verbatim comandos LaTeX
+\usepackage{amscd}		              % para setas longas
+
+
+
+
+\begin{document}
+
+	\title{Two-phase flows in sinusoidally constricted channel using
+	       moving mesh/boundary technique}
+
+	\author{\rm
+		\scriptsize
+		\begin{tabular}{l}
+			\textbf{Gustavo Anjos} -- gustavo.rabello@gmail.com\\
+			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
+			R. S\~ao Francisco Xavier 524, 20550-013 Rio de Janeiro, RJ, Brazil\\
+			\textbf{Gustavo Oliveira} -- tavolesliv@gmail.com\\
+			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
+			R. S\~ao Francisco Xavier 524, 20550-013 Rio de Janeiro, RJ, Brazil\\
+			\textbf{Jos\'e Pontes} -- jopontes@metalmat.ufrj.br\\
+			Escola Polit\'ecnica/COPPE -- Universidade Federal do Rio de Janeiro\\
+			P.O. Box 68505, Rio de Janeiro, RJ, 21941-972 Brasil\\
+			\textbf{John Thome} -- john.thome@epfl.ch\\
+			EPFL STI IGM LTCM, ME B1 345, Station 9, CH-1015, Lausanne, Switzerland\\
+			\textbf{Norberto Mangiavacchi} -- norberto.mangiavacchi@gmail.com\\
+			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
+			R. S\~ao Francisco Xavier 524, 20550-013 Rio de Janeiro, RJ, Brazil
+		\end{tabular}
+	}	
+
+\maketitle
+\thispagestyle{empty}
+\begin{abstract}
+Bubbles and drops dynamics through capillaries of variable cross-section
+still remains of considerable importantce in two-phase flows through
+porous media. Experimental studies are found in the literature where the
+motion of immiscible bubbles in different fluids is investigated.
+Recovery of oil by chemical flooding, biological processes and crude oil
+transportation in through pipelines are exemples of industry-related
+applications. We seek to study numerically the effects of the surface
+tension, bubble dynamics and channel geometry for two-phase flows in
+sinusoidally constricted channels using a moving boundary domain scheme,
+which dramatically shortens the domain length. Such a scheme moves the
+computational boundary nodes periodically according to the flow field or
+bubble centroid's velocity. The set of equations is written in a
+generalized form namely the Arbitrary Lagrangian-Eulerian (ALE)
+description, which combines the best aspects of both Lagrangian and
+Eulerian framework. The two-phase inteface position moves according to
+the flow field and it is explicity described by a set of interconnected
+nodes, segments and elements which ensures a sharp representation of the
+front, not requiring the use of any additional equation of motion
+\cite{anjos2012},\cite{anjos2014}. Unlike the traditional numerical
+approach where the domain's boundary is fixed in space and time, the
+boundary nodes are in constant motion, thus simulating the relative
+velocity between the bubble and the wall. Such a technique allows one to
+decrease considerable the domain length and, therefore, decrease the
+computational processing time. The new methodology proposed to simulate
+two-phase flows in sinusoidally constricted channels is compared to
+experimental results found in the literature
+\cite{olbricht1983},\cite{hemmat1996} showing good accuracy to describe
+interfacial forces and bubble dynamics in different complex geometries
+with moving boundaries. 
+\end{abstract}
+
+%--------------------------------------------------
+% \keywords{\em{Sinusoidally constricted channel, Moving boundary,
+% Two-phase flows, Arbitrary Lagrangian-Eulerian, Finite Element Method,
+% complex geometry}}
+%-------------------------------------------------- 
+
+
+\section{Introduction}
+\section{Governing Equations}
+\section{Results}
+\section{Conclusions}
+
+\bibliographystyle{plain}
+\bibliography{bibliography}
+
+\end{document}
+
+
+
+
+
+\typeout{ ****************** End of file main.tex ****************** }
+
