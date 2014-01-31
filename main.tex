@@ -87,17 +87,18 @@ with moving boundaries.
 \section{Introduction}
 
 Capillaries with variable cross-sections are used in enginnering
-applications to incite unsteady behaviours in the kinematics of flows, as
-opposed to the uniformity borne out in constant cross-sections
+applications to incite unsteady behaviours in the kinematics of flows,
+as opposed to the uniformity borne out in constant cross-sections
 domains. Some examples of two-phase flow modeling in diverse geometries,
 for instance, have been applied to support studies upon enhanced oil
-recovery (EOR) techniques by chemical flooding \cite{Olbricht1996}, \cite{Cobos2009}, 
-pore-scale prototyping and mobility of immiscible fluids in porous media of 
-subsurface \cite{Hemmat1996}, alteration of blood flow caused by
-vascular occlusions \cite{Forsester1970}. In such problems and like ones, 
-converging/diverging tubes, sinusoidally constricted capillaries, as 
-well as domains formed by a periodic pace of abrupt changes of diameters
-are extensively taken into account in their mathematical modeling.
+recovery (EOR) techniques by chemical flooding \cite{Olbricht1996},
+\cite{Cobos2009}, pore-scale prototyping and mobility of immiscible
+fluids in porous media of subsurface \cite{Hemmat1996}, alteration of
+blood flow caused by vascular occlusions \cite{Forsester1970}. In such
+problems and like ones, converging/diverging tubes, sinusoidally
+constricted capillaries, as well as domains formed by a periodic pace of
+abrupt changes of diameters are extensively taken into account in their
+mathematical modeling.
 
 A significant experimental insight about the influence of a tube with
 wavy-wall geometry upon the dynamics of a droplet motion was given by
@@ -107,45 +108,46 @@ drop of the droplet is always associated to the constrictions of the
 tube, which, for a real porous media, would be tied to the retention of
 bubbles at determined sites and their consequent low mobility.
 Comparatively, the pore plugging phenomenon, by which trapped droplets
-hinder the overall permeability of the medium, was faced by \cite{Graham2000} 
-through acoustic stimulation. Their results showed efficiency as to
-remobilization processes and good capabilities for application in several
-industrial operations, such as filtration issues, flow in packed beds,
-and the manufacture of fibrous composites. Besides, recent research was
-carried out in diverging/converging geometries to examine heat transfer
-characteristics of suspensions and polymers \cite{Narayanam2014}, which
-awakens a wide range of interest upon these flows.
+hinder the overall permeability of the medium, was faced by
+\cite{Graham2000} through acoustic stimulation. Their results showed
+efficiency as to remobilization processes and good capabilities for
+application in several industrial operations, such as filtration issues,
+flow in packed beds, and the manufacture of fibrous composites. Besides,
+recent research was carried out in diverging/converging geometries to
+examine heat transfer characteristics of suspensions and polymers
+\cite{Narayanam2014}, which awakens a wide range of interest upon these
+flows.
 
 With attention to computational works that prop up the investigation of
-the motion of disperse elements through narrow passages and bottlenecks, techniques 
-relied on finite volume/front-tracking were introduced in the modelling of
-buoyancy-driven viscous drop through constricted capillaries, where the
-interfaces were represented by using connected Lagrangian marker points
-which move with the local flow velocity
-\cite{MuradogluAndKayaalp2006:In:Olgac2006}, \cite{Olgac2006}.
-More recently, implementations gathering finite element/level-set
-methods also were performed in order to elucidate the dynamics of drops 
-inside constricted microcapillaries headed to industrial purposes as
-regards oil-water emulsions, mobility control, and pressure drop, for
-instance \cite{Roca2013}. 
+the motion of disperse elements through narrow passages and bottlenecks,
+techniques relied on finite volume/front-tracking were introduced in the
+modelling of buoyancy-driven viscous drop through constricted
+capillaries, where the interfaces were represented by using connected
+Lagrangian marker points which move with the local flow velocity
+\cite{MuradogluAndKayaalp2006:In:Olgac2006}, \cite{Olgac2006}. More
+recently, implementations gathering finite element/level-set methods
+also were performed in order to elucidate the dynamics of drops inside
+constricted microcapillaries headed to industrial purposes as regards
+oil-water emulsions, mobility control, and pressure drop, for instance
+\cite{Roca2013}. 
 
 In this work, we seek to study numerically the effects of surface
 tension, bubble dynamics, and geometry on two-phase flows in
-sinusoidally constricted channels by using a moving boundary domain scheme,
-which shortens the domain length dramatically. Such scheme moves the
-computational boundary nodes periodically according to the flow field or
-the bubble centroid's velocity. The set of equations is written in a
-generalized form, namely the Arbitrary Lagrangian-Eulerian (ALE)
+sinusoidally constricted channels by using a moving boundary domain
+scheme, which shortens the domain length dramatically. Such scheme moves
+the computational boundary nodes periodically according to the flow
+field or the bubble centroid's velocity. The set of equations is written
+in a generalized form, namely the Arbitrary Lagrangian-Eulerian (ALE)
 description, so combining the best aspects of both Lagrangian and
 Eulerian descriptions. To model the interface between the phases, we
-allow that the points over it move according to the flow field. In turn, 
-the interface is explicitly described by a set of interconnected nodes, 
-segments, and elements, so ensuring a sharp representation of the
-front and supplant the use of any additional equation to govern the
-movement of interface points \cite{anjos2012},\cite{anjos2014}. 
-Unlike the traditional numerical approach where the domain's boundary 
-is fixed in space and time, the boundary nodes are kept in constant motion, 
-thus simulating the relative velocity between the bubble and the wall. 
+allow that the points over it move according to the flow field. In turn,
+the interface is explicitly described by a set of interconnected nodes,
+segments, and elements, so ensuring a sharp representation of the front
+and supplant the use of any additional equation to govern the movement
+of interface points \cite{anjos2012},\cite{anjos2014}. Unlike the
+traditional numerical approach where the domain's boundary is fixed in
+space and time, the boundary nodes are kept in constant motion, thus
+simulating the relative velocity between the bubble and the wall.
 Moreover, the results are obtained over a reduced computational domain,
 which, therefore, implies a smaller computational processing time.
 
@@ -153,7 +155,47 @@ The paper is organized as follows:
 
 
 \section{Governing Equations}
-\section{Results}
+The non-dimensional incompressible conservation equations for two-phase
+flows is presented below through the generalized Arbitrary
+Lagrangian-Eulerian (ALE) framework including the surface tension term
+$\mathbf{f}$ and the gravity term $\mathbf{g}$: 
+
+\begin{equation}
+	\rho(\phi) [ \frac{\partial \uvet}{\partial t} 
+	+ \cvet \cdot \nabla \uvet ]
+	=
+	- \nabla p 
+	+ \frac{1}{\N^{1/2}} \nabla \cdot
+	[\mu(\phi) ( \nabla \uvet + \nabla \uvet^T)]+
+	\rho(\phi) \mathbf{g}+
+	\frac{1}{\Eo} \mathbf{f}
+	\label{eq:nd-momentum}
+\end{equation}
+
+\begin{equation}
+	\nabla \cdot \uvet
+	= 
+	0.
+\label{eq:nd-continuity} 
+\end{equation}
+
+On the left hand side of Eq.~\ref{eq:nd-momentum}, the convective velocity
+$\cvet$ represents the relative velocity between the flow field and the
+mesh, given by the following expression: $\cvet = \uvet - \hat{\uvet}$
+where $\uvet$ stands for the computed flow field velocity and
+$\hat{\uvet}$ for the mesh velocity. Pressure is represented by $p$ and
+time by $t$. The fluid density $\rho(\phi)$ and viscosity $\mu(\phi)$
+are defined as constant in each phase. The non-dimensional groups
+\textit{Archimedes} and \textit{E\"otv\"os} are defined as follow:
+
+\begin{equation}
+ \N = \frac{\rho_0^2 D^3 g}{\mu_0^2},
+ \Eo = \frac{\rho_0 g D^2}{\sigma_0},
+ \Mo = \frac{(\rho_l-\rho_g)\mu_0^4 g}{\rho_{0}^2 \sigma_0^3} 
+ \label{eq:nd-groups}
+\end{equation}
+
+section{Results}
 \section{Conclusions}
 
 \bibliographystyle{plain}
