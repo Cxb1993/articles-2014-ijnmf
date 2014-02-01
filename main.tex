@@ -28,10 +28,10 @@
 		\begin{tabular}{l}
 			\textbf{Gustavo Anjos} -- gustavo.anjos@uerj.br\\
 			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
-			R. S\~ao Francisco Xavier 524, 20550-013 Rio de Janeiro, RJ, Brazil\\
+			R. Fonseca Teles 121, 20550-013, Rio de Janeiro, RJ, Brazil\\
 			\textbf{Gustavo Oliveira} -- gustavo.oliveira@uerj.br\\
 			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
-			R. S\~ao Francisco Xavier 524, 20550-013 Rio de Janeiro, RJ, Brazil\\
+			R. Fonseca Teles 121, 20550-013 Rio de Janeiro, RJ, Brazil\\
 			\textbf{Jos\'e Pontes} -- jopontes@metalmat.ufrj.br\\
 			Escola Polit\'ecnica/COPPE -- Universidade Federal do Rio de Janeiro\\
 			P.O. Box 68505, Rio de Janeiro, RJ, 21941-972 Brasil\\
@@ -39,7 +39,7 @@
 			EPFL STI IGM LTCM, ME B1 345, Station 9, CH-1015, Lausanne, Switzerland\\
 			\textbf{Norberto Mangiavacchi} -- norberto@uerj.br\\
 			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
-			R. S\~ao Francisco Xavier 524, 20550-013 Rio de Janeiro, RJ, Brazil
+			R. Fonseca Teles 121, 20550-013, Rio de Janeiro, RJ, Brazil
 		\end{tabular}
 	}	
 
@@ -89,16 +89,15 @@ with moving boundaries.
 Capillaries with variable cross-sections are used in enginnering
 applications to incite unsteady behaviours in the kinematics of flows,
 as opposed to the uniformity borne out in constant cross-sections
-domains. Some examples of two-phase flow modeling in diverse geometries,
-for instance, have been applied to support studies upon enhanced oil
-recovery (EOR) techniques by chemical flooding \cite{Olbricht1996},
-\cite{Cobos2009}, pore-scale prototyping and mobility of immiscible
-fluids in porous media of subsurface \cite{Hemmat1996}, alteration of
-blood flow caused by vascular occlusions \cite{Forsester1970}. In such
-problems and like ones, converging/diverging tubes, sinusoidally
-constricted capillaries, as well as domains formed by a periodic pace of
-abrupt changes of diameters are extensively taken into account in their
-mathematical modeling.
+domains. Two-phase flow modelling in diverse geometries, were focused on 
+studies upon enhanced oil recovery (EOR) techniques by chemical 
+flooding \cite{Olbricht1996}, \cite{Cobos2009}, pore-scale prototyping, 
+evaluation of mobility control of immiscible fluids in porous media of 
+subsurface \cite{Hemmat1996}, and alteration of blood flow caused by 
+vascular occlusions \cite{Forsester1970}, for instance. In such problems and like ones, 
+converging/diverging tubes, sinusoidally constricted capillaries, as well as 
+domains formed by a periodic pace of throats are extensively taken into account 
+for their mathematical modelling.
 
 A significant experimental insight about the influence of a tube with
 wavy-wall geometry upon the dynamics of a droplet motion was given by
@@ -118,7 +117,7 @@ examine heat transfer characteristics of suspensions and polymers
 \cite{Narayanam2014}, which awakens a wide range of interest upon these
 flows.
 
-With attention to computational works that prop up the investigation of
+With attention to computational works propping up the investigation of
 the motion of disperse elements through narrow passages and bottlenecks,
 techniques relied on finite volume/front-tracking were introduced in the
 modelling of buoyancy-driven viscous drop through constricted
@@ -142,19 +141,23 @@ description, so combining the best aspects of both Lagrangian and
 Eulerian descriptions. To model the interface between the phases, we
 allow that the points over it move according to the flow field. In turn,
 the interface is explicitly described by a set of interconnected nodes,
-segments, and elements, so ensuring a sharp representation of the front
-and supplant the use of any additional equation to govern the movement
-of interface points \cite{anjos2012},\cite{anjos2014}. Unlike the
+segments, and elements so ensuring a sharp representation of the front
+and supplanting the use of any additional equation to govern the movement
+of interface points \cite{anjos2012}, \cite{anjos2014}. Unlike the
 traditional numerical approach where the domain's boundary is fixed in
 space and time, the boundary nodes are kept in constant motion, thus
 simulating the relative velocity between the bubble and the wall.
 Moreover, the results are obtained over a reduced computational domain,
 which, therefore, implies a smaller computational processing time.
 
-The paper is organized as follows:
+The paper is organized as follows: Section \ref{sec:governing} exposes
+briefly the set of equations governing the physical problem; Section
+\ref{sec:ale} gives an overview of the ALE formulation implemented; 
+Section \ref{sec:results} introduces the results obtained, and, in last, 
+conclusions are drawn in Section \ref{sec:conclusion}. 
 
 
-\section{Governing Equations}
+\section{{\label{sec:governing}Governing Equations}
 The non-dimensional incompressible conservation equations for two-phase
 flows is presented below through the generalized Arbitrary
 Lagrangian-Eulerian (ALE) framework including the surface tension term
