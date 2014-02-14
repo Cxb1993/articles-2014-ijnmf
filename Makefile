@@ -11,7 +11,7 @@ AUXFILE=$(LETTER:%.tex=%.dvi)
 
 all: $(DVIFILE) 
 
-$(DVIFILE): main.tex biblio
+$(DVIFILE): main.tex 
 	latex $(@:%.dvi=%.tex)
 	bibtex $(@:%.dvi=%)
 	latex $(@:%.dvi=%.tex)

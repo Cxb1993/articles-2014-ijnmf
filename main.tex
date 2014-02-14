@@ -1,97 +1,103 @@
-\typeout{ ====================================================================}
-\typeout{ this is file main.tex, created at 27-Jan-2014                       }
-\typeout{ maintained by Gustavo Rabello dos Anjos                             }
-\typeout{ e-mail: gustavo.rabello@gmail.com                                   }
-\typeout{ ====================================================================}
+\documentclass{wccm2014}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MATH MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tr}{{\,\rm tr}\,}
+\newcommand{\sen}{{\,\rm sen}\,}
+\newcommand{\senh}{{\,\rm senh}\,}
+\newcommand{\diverg}{{\,\rm div}\,}
+\newcommand{\grad}{\,\mathbf{grad}\,}
+\newcommand{\rot}{\,\mathbf{rot}\,}
+\newcommand{\uvet}{\mathbf{u}}
+\newcommand{\vvet}{\mathbf{v}}
+\newcommand{\cvet}{\mathbf{c}}
+\newcommand{\wvet}{\mathbf{w}}
+\newcommand{\xvet}{\mathbf{x}}
+\newcommand{\gvet}{\mathbf{g}}
+\newcommand{\fvet}{\mathbf{f}}
+\newcommand{\nvet}{\mathbf{n}}
+\newcommand{\tvet}{\mathbf{t}}
+\newcommand{\Imat}{\mathbf{I}}
+\newcommand{\Eo}{\mathrm{Eo}}
+\newcommand{\N}{\mathrm{N}}
+\newcommand{\Mo}{\mathrm{Mo}}
+\newcommand{\ca}{\cellcolor[gray]{0.5}}
+\newcommand{\cb}{\cellcolor[gray]{0.0}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  -- END -- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-\documentclass[12pt,fleqn]{article}
-\usepackage[T1]{fontenc}              % acentuacao e hifenizacao portuguesa
-\usepackage[hmargin=30mm,vmargin=25mm]{geometry}
-%\usepackage[pdftex]{graphicx}        % pacote para inclusao de figuras,
-\usepackage{subfloat}                 % pacote para figuras duplas (subfigure)
-\usepackage{amssymb,amsmath,amsfonts} % pacote matematicos
-\usepackage{tocbibind}		      % para inclusao de bib e ind na TOC
-\usepackage{pictexwd,color}	          % ambiente para PICTEX
-\usepackage{alltt,verbatim,moreverb}  % para entrada verbatim comandos LaTeX
-\usepackage{amscd}		              % para setas longas
-%\usepackage{GCPOTools}                % GCPO's UDFs
+\title{TWO-PHASE FLOWS IN SINUSOIDALLY CONSTRICTED CHANNEL USING MOVING
+MESH/BOUNDARY TECHNIQUE}
 
+\author{GUSTAVO ANJOS$^{*}$, GUSTAVO OLIVEIRA$^{*}$, JOS\'E
+PONTES$^{\dag}$, JOHN R. THOME$^{\dag}$ AND NORBERTO MANGIAVACCHI$^{*}$}
+
+\heading{Gustavo Anjos, Gustavo Oliveira, Jose Pontes, John R. Thome,
+Norberto Mangiavacchi}
+
+\address{$^{*}$Mechanical Engineering Department/GESAR Group, State
+University of Rio de Janeiro\\ R. Fonseca Teles 121, 20550-013, Rio de
+Janeiro, RJ, Brazil\\ 
+e-mail: gustavo.anjos@uerj.br, web page: http://gustavo.rabello.org
+\and
+$^{\dag}$Escola Polit\'ecnica/COPPE -- Universidade Federal do Rio de
+Janeiro\\ P.O. Box 68505, Rio de Janeiro, RJ, 21941-972 Brasil\\
+e-mail: jopontes@metalmat.ufrj.br
+\and
+$^{\dag}$EPFL STI IGM LTCM, ME B1 345, Station 9, CH-1015, Lausanne,
+Switzerland\\
+e-mail: john.thome@epfl.ch}
+
+% NEED TO INCLUDE KEYWORDS!
+\keywords{Finite Element Method, Arbitrary Lagrangian-Eulerian,sharp
+interface, complex geometry, sinusoidal}
+
+\abstract{ Bubbles and drops dynamics through capillaries of variable
+cross-section still remains of considerable importantce in two-phase
+flows through porous media. Experimental studies are found in the
+literature where the motion of immiscible bubbles in different fluids is
+investigated. Recovery of oil by chemical flooding, biological processes
+and crude oil transportation in through pipelines are exemples of
+industry-related applications. We seek to study numerically the effects
+of the surface tension, bubble dynamics and channel geometry for
+two-phase flows in sinusoidally constricted channels using a moving
+boundary domain scheme, which dramatically shortens the domain length.
+Such a scheme moves the computational boundary nodes periodically
+according to the flow field or bubble centroid's velocity. The set of
+equations is written in a generalized form namely the Arbitrary
+Lagrangian-Eulerian (ALE) description, which combines the best aspects
+of both Lagrangian and Eulerian framework. The two-phase inteface
+position moves according to the flow field and it is explicity described
+by a set of interconnected nodes, segments and elements which ensures a
+sharp representation of the front, not requiring the use of any
+additional equation of motion \cite{anjos2012,anjos2014}. Unlike
+the traditional numerical approach where the domain's boundary is fixed
+in space and time, the boundary nodes are in constant motion, thus
+simulating the relative velocity between the bubble and the wall. Such a
+technique allows one to decrease considerable the domain length and,
+therefore, decrease the computational processing time. The new
+methodology proposed to simulate two-phase flows in sinusoidally
+constricted channels is compared to experimental results found in the
+literature \cite{olbricht1983,hemmat1996} showing good accuracy
+to describe interfacial forces and bubble dynamics in different complex
+geometries with moving boundaries.}
 
 \begin{document}
+%\maketitle
 
-	\title{Two-phase flows in sinusoidally constricted channel using
-	       moving mesh/boundary technique}
-
-	\author{\rm
-		\scriptsize
-		\begin{tabular}{l}
-			\textbf{Gustavo Anjos} -- gustavo.anjos@uerj.br\\
-			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
-			R. Fonseca Teles 121, 20550-013, Rio de Janeiro, RJ, Brazil\\
-			\textbf{Gustavo Oliveira} -- gustavo.oliveira@uerj.br\\
-			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
-			R. Fonseca Teles 121, 20550-013 Rio de Janeiro, RJ, Brazil\\
-			\textbf{Jos\'e Pontes} -- jopontes@metalmat.ufrj.br\\
-			Escola Polit\'ecnica/COPPE -- Universidade Federal do Rio de Janeiro\\
-			P.O. Box 68505, Rio de Janeiro, RJ, 21941-972 Brasil\\
-			\textbf{John Thome} -- john.thome@epfl.ch\\
-			EPFL STI IGM LTCM, ME B1 345, Station 9, CH-1015, Lausanne, Switzerland\\
-			\textbf{Norberto Mangiavacchi} -- norberto@uerj.br\\
-			Mechanical Engineering Department/GESAR Group, State University of Rio de Janeiro\\
-			R. Fonseca Teles 121, 20550-013, Rio de Janeiro, RJ, Brazil
-		\end{tabular}
-	}	
-
-\maketitle
-\thispagestyle{empty}
-\begin{abstract}
-Bubbles and drops dynamics through capillaries of variable cross-section
-still remains of considerable importantce in two-phase flows through
-porous media. Experimental studies are found in the literature where the
-motion of immiscible bubbles in different fluids is investigated.
-Recovery of oil by chemical flooding, biological processes and crude oil
-transportation in through pipelines are exemples of industry-related
-applications. We seek to study numerically the effects of the surface
-tension, bubble dynamics and channel geometry for two-phase flows in
-sinusoidally constricted channels using a moving boundary domain scheme,
-which dramatically shortens the domain length. Such a scheme moves the
-computational boundary nodes periodically according to the flow field or
-bubble centroid's velocity. The set of equations is written in a
-generalized form namely the Arbitrary Lagrangian-Eulerian (ALE)
-description, which combines the best aspects of both Lagrangian and
-Eulerian framework. The two-phase inteface position moves according to
-the flow field and it is explicity described by a set of interconnected
-nodes, segments and elements which ensures a sharp representation of the
-front, not requiring the use of any additional equation of motion
-\cite{anjos2012},\cite{anjos2014}. Unlike the traditional numerical
-approach where the domain's boundary is fixed in space and time, the
-boundary nodes are in constant motion, thus simulating the relative
-velocity between the bubble and the wall. Such a technique allows one to
-decrease considerable the domain length and, therefore, decrease the
-computational processing time. The new methodology proposed to simulate
-two-phase flows in sinusoidally constricted channels is compared to
-experimental results found in the literature
-\cite{olbricht1983},\cite{hemmat1996} showing good accuracy to describe
-interfacial forces and bubble dynamics in different complex geometries
-with moving boundaries. 
-\end{abstract}
-
-%--------------------------------------------------
-% \keywords{\em{Sinusoidally constricted channel, Moving boundary,
-% Two-phase flows, Arbitrary Lagrangian-Eulerian, Finite Element Method,
-% complex geometry}}
-%-------------------------------------------------- 
-
-
-\section{Introduction}
+\section{INTRODUCTION}
+\label{sec:intro}
 
 Capillaries with variable cross-sections are used in enginnering
 applications to incite unsteady behaviours in the kinematics of flows,
 as opposed to the uniformity borne out in constant cross-sections
 domains. Two-phase flow modelling in diverse geometries, were focused on 
 studies upon enhanced oil recovery (EOR) techniques by chemical 
-flooding \cite{olbricht1996}, \cite{cobos2009}, pore-scale prototyping, 
+flooding \cite{olbricht1996,cobos2009}, pore-scale prototyping, 
 evaluation of mobility control of immiscible fluids in porous media of 
 subsurface \cite{hemmat1996}, and alteration of blood flow caused by 
 vascular occlusions \cite{forrester1970}, for instance. In such problems
@@ -101,23 +107,22 @@ for their mathematical modelling.
 
 A significant experimental insight about the influence of a tube with
 wavy-wall geometry upon the dynamics of a droplet motion was given by
-\cite{olbricht1983}, whereby they concluded that it depends
-strongly on the capillary number. Moreover, they found that the pressure
-drop of the droplet is always associated to the constrictions of the
-tube, which, for a real porous media, would be tied to the retention of
-bubbles at determined sites and their consequent low mobility.
-Comparatively, the pore plugging phenomenon, by which trapped droplets
-hinder the overall permeability of the medium, was faced by
-\cite{graham2000} through acoustic stimulation. Their results showed
-efficiency as to remobilization processes and good capabilities for
-application in several industrial operations, such as filtration issues,
-flow in packed beds, and the manufacture of fibrous composites. Drop
-breakup in constricted capillaries, or \emph{snap-off} effects, is 
-an appreciated issue \cite{tsai1994}. Apart
-from these, recent research was also carried out in diverging/converging geometries to
-examine heat transfer characteristics of suspensions and polymers
-\cite{narayanam2014}, which awakens a wide range of interest upon these
-flows.
+\cite{olbricht1983}, whereby they concluded that it depends strongly on
+the capillary number. Moreover, they found that the pressure drop of the
+droplet is always associated to the constrictions of the tube, which,
+for a real porous media, would be tied to the retention of bubbles at
+determined sites and their consequent low mobility. Comparatively, the
+pore plugging phenomenon, by which trapped droplets hinder the overall
+permeability of the medium, was faced by \cite{graham2000} through
+acoustic stimulation. Their results showed efficiency as to
+remobilization processes and good capabilities for application in
+several industrial operations, such as filtration issues, flow in packed
+beds, and the manufacture of fibrous composites. Drop breakup in
+constricted capillaries, or \emph{snap-off} effects, is an appreciated
+issue \cite{tsai1994}. Apart from these, recent research was also
+carried out in diverging/converging geometries to examine heat transfer
+characteristics of suspensions and polymers \cite{narayanam2014}, which
+awakens a wide range of interest upon these flows.
 
 With attention to computational works propping up the investigation of
 the motion of disperse elements through narrow passages and bottlenecks,
@@ -125,7 +130,7 @@ techniques relied on finite volume/front-tracking were introduced in the
 modelling of buoyancy-driven viscous drop through constricted
 capillaries, where the interfaces were represented by using connected
 Lagrangian marker points which move with the local flow velocity
-\cite{muradoglu2006}, \cite{olgac2006}. More
+\cite{muradoglu2006,olgac2006}. More
 recently, implementations gathering finite element/level-set methods
 also were performed in order to elucidate the dynamics of drops inside
 constricted microcapillaries headed to industrial purposes as regards
@@ -145,21 +150,37 @@ allow that the points over it move according to the flow field. In turn,
 the interface is explicitly described by a set of interconnected nodes,
 segments, and elements so ensuring a sharp representation of the front
 and supplanting the use of any additional equation to govern the movement
-of interface points \cite{anjos2012}, \cite{anjos2014}. Unlike the
+of interface points \cite{anjos2012,anjos2014}. Unlike the
 traditional numerical approach where the domain's boundary is fixed in
 space and time, the boundary nodes are kept in constant motion, thus
 simulating the relative velocity between the bubble and the wall.
 Moreover, the results are obtained over a reduced computational domain,
 which, therefore, implies a smaller computational processing time.
 
-The paper is organized as follows: Section \ref{sec:governing} exposes
-briefly the set of equations governing the physical problem; Section
-\ref{sec:ale} gives an overview of the ALE formulation implemented; 
-Section \ref{sec:results} introduces the results obtained, and, in last, 
-conclusions are drawn in Section \ref{sec:conclusion}. 
+The paper is organized as follows: Sec.~(\ref{sec:governing}) exposes
+briefly the set of equations governing the physical problem;
+Sec.~(\ref{sec:ale}) gives an overview of the ALE formulation
+implemented; Sec.~(\ref{sec:results}) introduces the results obtained,
+and, in last, conclusions are drawn in Sec.~(\ref{sec:conclusions}). 
 
-
-\section{{\label{sec:governing}Governing Equations}
+%--------------------------------------------------
+% A displayed equation is numbered, using Arabic numbers in
+% parentheses. It should be centered, leaving a 6pt space above and
+% below to separate it from the surrounding text.
+% The following example is a single line equation:
+% \vskip-.6cm
+% \begin{eqnarray}
+% Ax = b
+% \end{eqnarray}
+% The next example is a multi-line equation:
+% \vskip-.6cm
+% \begin{eqnarray}
+% Ax = b \\
+% Ax = b \nonumber
+% \end{eqnarray}
+%-------------------------------------------------- 
+\section{GOVERNING EQUATIONS}
+\label{sec:governing}
 The non-dimensional incompressible conservation equations for two-phase
 flows is presented below through the generalized Arbitrary
 Lagrangian-Eulerian (ALE) framework including the surface tension term
@@ -200,17 +221,34 @@ are defined as constant in each phase. The non-dimensional groups
  \label{eq:nd-groups}
 \end{equation}
 
-section{Results}
-\section{Conclusions}
 
+%%% SUBSECTION EX.: \subsection{Example}
+\section{RESULTS}
+\label{sec:results}
+This is the result section
+\section{CONCLUSIONS}
+\label{sec:conclusions}
+This is the conclusions section
+\section{ACKNOWLEDGEMENTS}
+\label{sec:acknowledgements}
+This research is funded by the brazilian research funding agency CAPES
+in the scholarship program Science without Borders.
+
+% BIBLIOGRAPHY EXAMPLE
 \bibliographystyle{plain}
 \bibliography{bibliography}
 
+%--------------------------------------------------
+% \begin{thebibliography}{99}
+% BIBLIOGRAPHY EXAMPLE
+% \bibitem{Zienkiewicz}  Zienkiewicz, O.C. and  Taylor, R.L. \textit{The finite element method}. McGraw Hill,
+% Vol. I., (1989), Vol. II., (1991).
+% \bibitem{Idelsohn} Idelsohn, S.R. and O\~{n}ate, E. Finite element and finite volumes. Two good friends.
+% \textit{Int. J. Num. Meth. Engng.} (1994) \textbf{37}:3323--3341.
+% \end{thebibliography}
+%-------------------------------------------------- 
+
+
 \end{document}
 
-
-
-
-
-\typeout{ ****************** End of file main.tex ****************** }
 
