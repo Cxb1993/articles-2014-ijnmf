@@ -61,7 +61,7 @@ cross-section still remains of considerable importantce in two-phase
 flows through porous media. Experimental studies are found in the
 literature where the motion of immiscible bubbles in different fluids is
 investigated. Recovery of oil by chemical flooding, biological processes
-and crude oil transportation in through pipelines are exemples of
+and crude oil transportation in through pipelines are examples of
 industry-related applications. We seek to study numerically the effects
 of the surface tension, bubble dynamics and channel geometry for
 two-phase flows in sinusoidally constricted channels using a moving
@@ -179,8 +179,17 @@ and, in last, conclusions are drawn in Sec.~(\ref{sec:conclusions}).
 % Ax = b \nonumber
 % \end{eqnarray}
 %-------------------------------------------------- 
-\section{GOVERNING EQUATIONS}
+\section{MATHEMATICAL FORMULATION}
 \label{sec:governing}
+
+For the mathematical description of the problem, it suffices to follow up the illustration provided by Fig. \ref{fig:domain}, which represents the central cut plane perpendicular to the sinusoidal tube. Consider $ \Omega^1 $ the region of the domain occupied by the vapour phase and $ \Omega^2 $ the complementary, associated to the liquid phase. The tube constrictions bound the fluid portion obeying a waveform function given by $ a(x) $, whose parameters $ a_0 $, $ a $, $ \phi $, $ n $, and $ \alpha $ are, respectively, an initial wave amplitude (conveniently chosen to be zero herein), the wave amplitude, the phase angle, the number of periods, and a stretching factor. The two latter parameters control the wavelength so allowing certain flexibility to mesh design and adjustment. $ P $ is the variable related to the longitudinal periodic length, while $ R $ is a mean radius for the tube. 
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{figs/eps/profile-tube-bubble.eps}
+\caption{\label{fig:domain}Schematic of the central cut plane for the sinusoidally constricted domain.}
+\end{figure}
+The vapour phase is made up by a Taylor bubble of radius $ r $, whose dynamics we are intended to analyse. In virtue of a moving-frame technique, the transit of the bubble through the bottlenecks is locally evaluated by observing the topological changes on the bubble's surface. At the top and bottom cross sections, the liquid velocity is essentially uniform, being that, an equivalent buoyancy-driven flow produced with the application of a pressure gradient contrary to the bubble's motion establishes an outflow condition downhill. \marginpar{GCPO: Gustavo, pls, check the parameters setting (n,$\phi$,...).}
+
 The non-dimensional incompressible conservation equations for two-phase
 flows is presented below through the generalized Arbitrary
 Lagrangian-Eulerian (ALE) framework including the surface tension term
