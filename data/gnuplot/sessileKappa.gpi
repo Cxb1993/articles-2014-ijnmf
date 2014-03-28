@@ -1,0 +1,53 @@
+# Gnuplot script file for plotting data in file "vk-???.dat"
+set   autoscale                        # scale axes automatically
+unset log                              # remove any log-scaling
+unset label                            # remove any previous labels
+set xtic auto                          # set xtics automatically
+set ytic auto                          # set ytics automatically
+#set title "Sessile Drop" 
+set xlabel "height (z)" font "Times-Roman,25" offset 0,0
+set ylabel "curvature ({/Symbol k})" font "Times-Roman,25" offset 1,0
+set label
+#set xrange [2.8:3.7]
+set xtics 0.2
+#set yrange [0.00:6.0] 
+set ytics 2
+unset grid
+
+set key top right
+set key box ls -1 width -6 spacing 1.0
+set key samplen 4
+
+# color definitions
+set style line 1 pointsize 1.0 lt 1 lw 4
+set style line 2 lt 13 pt 64 ps 1 lw 2
+
+set terminal postscript enhanced font "Times-Roman,25"
+set output '| ps2pdf - sessileKappa.pdf'
+
+fileObj1 = "../dist1.dat"
+fileObj2 = "../dist2.dat"
+fileObj3 = "../dist3.dat"
+
+f(x) = 5.19-2*x
+
+#--------------------------------------------------
+# plot fileObj1 using ($3+3.98):($6) title 'numerical' with points ls 2 lw 2,\
+#      fileObj2 using ($3+3.98):($6) title 'numerical' with points ls 3 lw 2,\
+#      fileObj3 using ($3+3.98):($6) title 'numerical' with points ls 4 lw 2,\
+#  	 f(x) title 'analytical' with lines ls 1 lw 4
+#-------------------------------------------------- 
+
+#--------------------------------------------------
+# plot fileObj1 using ($3+1.2):($6) every 5 \
+#      title 'h=0.12' with points ls 2 lw 2,\
+#  	 f(x) title 'analytical' with lines ls 1 lw 4
+# 
+# plot fileObj2 using ($3+1.2):($6) every 10 \
+#      title 'h=0.06' with points ls 3 lw 2,\
+#  	 f(x) title 'analytical' with lines ls 1 lw 4
+#-------------------------------------------------- 
+
+plot fileObj3 using ($3+1.2):($6) every 10 \
+     title 'h=0.03' with points ls 2,\
+ 	 f(x) title 'analytical: {/Symbol k}(z)=5.19-2*z' with lines ls 1

@@ -4,7 +4,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
-
+\usepackage{subfig}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  MATH MACROS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\tr}{{\,\rm tr}\,}
 \newcommand{\sen}{{\,\rm sen}\,}
@@ -232,9 +232,155 @@ are defined as constant in each phase. The non-dimensional groups
 
 
 %%% SUBSECTION EX.: \subsection{Example}
-\section{RESULTS}
+\section{NUMERICAL RESULTS}
 \label{sec:results}
-This is the result section
+
+\subsection{Sessile drop}
+\label{sessile}
+The next simulation was performed to validate the surface tension
+implementation and its coupling with pressure and gravity. A spherical
+drop with radius $R=0.5$ was initialized two diameters above the bottom
+of the domain and then released. Due to gravity, the drop, being 
+heavier than the surrounding fluid, falls and hits the solid surface.
+Before the contact between the solid surface and the interface, the drop
+deforms to a quasi-steady state and approaches the wall with no
+significant shape changes. The drop's profile remains axisymmetric and
+its shape can be approximated by the classical Young-Laplace equation of 
+capillarity which, in non-dimensional form, states that:
+
+\begin{equation}
+	\big( \frac{1}{R_1}+\frac{1}{R_2} \big)\frac{1}{Eo}
+	=
+	\Delta p_g
+	=
+	\Delta \rho g (z-z_0)
+	\label{eq:young-laplace}
+\end{equation}
+
+\noindent where $R_1$ and $R_2$ are the two principal radii at the apex
+of the drop, $\sigma$ is the interfacial tension and $\Delta p_g$ stands
+for the hydrostatic pressure difference across the interface, where
+$\Delta \rho = \rho_{in}-\rho_{out}$. Considering $\phi$ as the drop
+tangent angle with respect to the wall, for an axisymmetric drop:
+
+\begin{equation}
+	\big( \frac{1}{R_1}+\frac{1}{R_2} \big)
+	=
+	\kappa 
+	= 
+	\frac{d\phi}{ds} + \frac{\sin \phi}{r} 
+	\label{eq:yl2}
+\end{equation}
+
+\noindent where $s$ is the coordinate along the surface and $r$ is
+the radial coordinate. Substituting Eq.~(\ref{eq:yl2}) into 
+Eq.~(\ref{eq:young-laplace}), results in:
+
+\begin{equation}
+	\frac{d \phi}{ds} = 
+	\hat{\Eo}(p-z) - \frac{\sin \phi}{r}
+	\label{eq:sessile1}
+\end{equation}
+
+\begin{equation}
+	\frac{dr}{ds} = \cos \phi
+	\label{eq:sessile2}
+\end{equation}
+
+\begin{equation}
+	\frac{dz}{ds} = \sin \phi
+	\label{eq:sessile3}
+\end{equation}
+
+\noindent Here, $\hat{p}$ stands for the dimensional reference pressure,
+$p=\hat{p}/\rho g L$ as the non-dimensional pressure and $\hat
+{\Eo}=\Eo(\Delta \rho/\rho_{in})$ as the modified \textit{E\"otv\"os}
+number. These equations are solved using a forth order Runge-Kutta method with
+appropriate initial conditions: $s=0$, $\phi=0$, $r=0.258$ and $z=0$ and
+then solved and integrated up to $\phi=\pi$. The solution of the
+ordinary differential equations presented from \ref{eq:sessile1} to
+\ref{eq:sessile3} are used to benchmark the numerical solution given by
+the presented ALE-FEM two-phase flows code.
+
+% and pressure due to the curvature
+% $P_{\sigma}=2 \sigma / r$. 
+% 
+% For an axisymmetric drop, $R_1=R_2=r$ where
+% $r$ is the radius of curvature at the apex. 
+
+% simulation conditions
+The simulation of the drop for three different mesh refinement levels
+($h={0.12,0.06,0.03}$) was performed assuming the following
+non-dimensional parameters: $R=0.5$, $\Eo=2$, $\rho_{in}=1.0$ and
+$\mu_{in}=1.0$ for the drop and $\rho_{out}=0.1$ and $\mu_{out}=0.9$ for
+the external fluid. The domain limits were set to be
+$8D\text{x}8D\text{x}4D$, where the last dimension stands for the
+direction of gravity, and discretized by approximately $26000$
+tetrahedrons and $5100$ nodes. The interface mesh had approximately
+$5400$ triangles in which $2056$ were part of the interface mesh. The
+mesh parameters used were $\beta_1=0$, $\beta_2=1.0$, $\beta_3=1.0$,
+$\gamma_1=0.1$ and $\gamma_2=0.0$, thus keeping the volumetric and
+surface meshes as well as the distance of nodes to the surface elements
+almost uniform while the drop is moving downward to the bottom of the
+domain. The final solution of the sessile drop test case
+can be seen in Fig.~(\ref{fig:sessileMesh}), where the background mesh
+was intentionally sliced to show the background tetrahedron faces and
+the triangular surface mesh of the axisymmetric drop with $h=0.06$.
+Figure~(\ref{fig:sessileKappa}) shows the curvature distribution along
+the drop's height. The solid line was fit using the data from
+$z=[0.2,0.8]$ by the least squares method; therefore the slope of such a
+line gives the value of $\hat{\Eo}=2$ for which it can be used to solve
+the previous mentioned ODE. Additionally, comparing the distance from
+the numerical data to the solid line, it is possible to compute the
+error of curvature for the simulated drop. Thus, the curvature error
+$\text{Error}_{\kappa}$ was found to be $0.2$, showing reasonable
+agreement to the analytical solution. Furthermore, the numerical
+solution of the drop's shape is compared to the semi-analytical solution
+of the Young-Laplace's equation
+(Eqs.~(\ref{eq:sessile1})--(\ref{eq:sessile3}))
+and is shown in Fig.~(\ref{fig:sessileShape}). The results show that the
+sessile drop is correctly predicted by the present implementation, due
+to the accurate balance of the gravity, pressure and surface tension
+forces.
+
+\begin{figure}[ht!]
+	\begin{center}
+		\includegraphics[angle=0, scale=0.5]{figs/eps/sessileMesh.eps}
+	\end{center}
+	\caption{Numerical solution of the sessile drop test
+	case. The tetrahedron faces of a cut-plane background mesh and the
+	triangular surface mesh ($h=0.06$) are shown to illustrate the last
+	time step, whose shape is used to compare with the analytical
+	solution given by Eqs.(\ref{eq:sessile1}--\ref{eq:sessile3}).}
+	\label{fig:sessileMesh} 
+\end{figure}
+
+\begin{figure}[ht!]
+	\begin{center}
+		\includegraphics[angle=0, scale=0.5]{figs/eps/sessileKappa.eps}
+	\end{center}
+	\caption{Curvature distribution along the drop's height. The solid
+	line was fit by the least square method and its slope gives the value 
+	of $\hat{\Eo}=2$.}
+	\label{fig:sessileKappa} 
+\end{figure}
+
+\begin{figure}[ht!]
+	\begin{center}
+		\subfloat[]{
+		\includegraphics[angle=0, scale=0.43]{figs/eps/sessileShape.eps}}
+		\subfloat[]{
+		\includegraphics[angle=0, scale=0.43]{figs/eps/sessileShapeZoom.eps}}
+	\end{center}
+	\caption{(a) Comparison between the numerical solution for
+	 different mesh refinement levels of an 3-dimensional axisymmetric
+	 sessile drop and the analytical solution of its shape derived by
+	 the Young-Laplace equation of capillarity. (b) Detailed view of the
+	3-dimensional drop for $0.25<x<0.6$ (bottom part) and for $0<x<0.35$
+  (upper part). }
+	\label{fig:sessileShape} 
+\end{figure}
+
 \section{CONCLUSIONS}
 \label{sec:conclusions}
 This is the conclusions section

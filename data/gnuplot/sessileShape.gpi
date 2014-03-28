@@ -1,0 +1,80 @@
+# Gnuplot script file for plotting data in file "vk-???.dat"
+set   autoscale                        # scale axes automatically
+unset log                              # remove any log-scaling
+unset label                            # remove any previous labels
+set xtic auto                          # set xtics automatically
+set ytic auto                          # set ytics automatically
+
+set terminal postscript enhanced font "Times-Roman,25"
+set output '| ps2pdf - sessileShape.pdf'
+
+# color definitions
+set style line 1 lt 1 lw 4
+set style line 2 lt 13 pt 64 ps 1.5 lw 3
+set style line 3 lt 15 pt 65 ps 1.5 lw 3
+set style line 4 lt 69 pt 69 ps 1.5 lw 3
+set style line 5 lt 1 lw 6
+set style line 6 lt 13 pt 64 ps 3 lw 3
+set style line 7 lt 15 pt 65 ps 3 lw 3
+set style line 8 lt 69 pt 69 ps 3 lw 3
+
+set datafile separator ","
+
+fileObj1 = "../sessile1.csv"
+fileObj2 = "../sessile2.csv"
+fileObj3 = "../sessile3.csv"
+fileObjAnalytic = "../sessile3dExact.dat"
+
+set size ratio -1
+#set title "Sessile Drop" 
+set xlabel "x" offset 1,0
+set ylabel "height (z)" offset 1,0
+set label
+set xrange [-0.6:0.6]
+set xtics 0.2
+set yrange [0.0:1.0]
+set ytics 0.2
+unset grid
+set key center
+set key box ls -1 width -1 spacing 1.0
+set key samplen 4
+plot fileObj1 using 25:($26+1.2) every 3 title 'h=0.12' with points ls 2 ,\
+     fileObj2 using 25:($26+1.2) every 3 title 'h=0.06' with points ls 3 ,\
+     fileObj3 using 25:($26+1.197) every 3 title 'h=0.03' with points ls 4,\
+ 	 fileObjAnalytic using 2:($3+0.06) title 'analytical' with lines ls 1
+
+
+# set subplot function
+set output '| ps2pdf - sessileShapeZoom.pdf'
+set multiplot layout 2,1
+
+
+# set subplot function
+set size ratio 0.653
+set origin 0.0,0.0
+unset key
+set xlabel "x" offset 1,0
+set xrange [0.25:0.6]
+set xtics 0.1
+set yrange [0.03:0.3]
+set ytics 0.1
+unset ylabel
+plot fileObj1 using 25:($26+1.2) every 3 title 'h=0.12' with points ls 6 ,\
+     fileObj2 using 25:($26+1.2) every 3 title 'h=0.06' with points ls 7 ,\
+     fileObj3 using 25:($26+1.197) every 3 title 'h=0.03' with points ls 8,\
+ 	 fileObjAnalytic using 2:($3+0.06) title 'analytical' with lines ls 5
+
+set size ratio -1
+set origin 0.0,0.5
+unset key
+set xrange [0.0:0.35]
+set xtics 0.1
+set yrange [0.63:0.90]
+set ytics 0.1
+unset xlabel
+unset ylabel
+plot fileObj1 using 25:($26+1.2) every 3 title 'h=0.12' with points ls 6 ,\
+     fileObj2 using 25:($26+1.2) every 3 title 'h=0.06' with points ls 7 ,\
+     fileObj3 using 25:($26+1.197) every 3 title 'h=0.03' with points ls 8,\
+ 	 fileObjAnalytic using 2:($3+0.06) title 'analytical' with lines ls 5
+
